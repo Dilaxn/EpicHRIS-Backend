@@ -38,7 +38,7 @@ const leaveTypeRouter = require('./src/leave/routers/leave_type');
 const workWeekRouter = require('./src/leave/routers/work_week');
 const holidayRouter = require('./src/leave/routers/holiday');
 
-const chatRouter = require('./src/admin/routers/chat');
+// const chatRouter = require('./src/admin/routers/chat');
 const productRoutes = require("./src/image/controllers/ProfilePic");
 
 // const testRouter = require('./playground/test');
@@ -47,15 +47,15 @@ const productRoutes = require("./src/image/controllers/ProfilePic");
 const app = express();
 const port = process.env.PORT || 3001;
 const http = require('http').createServer(app)
-const io = require('socket.io')(http)
-
-
-
-io.on('connection', socket => {
-    socket.on('message', ({ name, message }) => {
-        io.emit('message', { name, message })
-    })
-})
+// const io = require('socket.io')(http)
+//
+//
+//
+// io.on('connection', socket => {
+//     socket.on('message', ({ name, message }) => {
+//         io.emit('message', { name, message })
+//     })
+// })
 
 app.use(express.json());
 app.use(cors())
@@ -104,7 +104,7 @@ app.use(leavePeriodRouter);
 app.use(leaveTypeRouter);
 app.use(workWeekRouter);
 app.use(holidayRouter);
-app.use(chatRouter);
+// app.use(chatRouter);
 
 
 // app.use(testRouter);
