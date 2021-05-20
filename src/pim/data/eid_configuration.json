@@ -1,0 +1,6 @@
+{
+  "prefix": "eid",
+  "number_length": 3,
+  "increase_by": 1,
+  "highest_number": 0
+}

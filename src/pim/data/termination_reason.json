@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Contract Not Renewed"
+  },
+  {
+    "name": "Deceased"
+  },
+  {
+    "name": "Dismissed"
+  },
+  {
+    "name": "Laid-Off"
+  },
+  {
+    "name": "Other"
+  },
+  {
+    "name": "Physically disabled/ Compensated"
+  },
+  {
+    "name": "Resigned"
+  },
+  {
+    "name": "Resigned-Company Requested"
+  },
+  {
+    "name": "Resigned-Self Proposed"
+  },
+  {
+    "name": "Retired"
+  }
+]
