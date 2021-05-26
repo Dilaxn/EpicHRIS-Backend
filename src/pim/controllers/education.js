@@ -118,6 +118,7 @@ const readAllEducation = async (req, res, emp_id) => {
             return;
         }
 
+
         const final = employee.toObject();
         delete final.id;
         final.educations.forEach((education) => {

@@ -1,4 +1,5 @@
 const express = require('express');
+require('dotenv').config();
 require('./db/mongoose');
 const cors = require('cors');
 const morgan = require("morgan");
@@ -33,10 +34,17 @@ const customFieldRouter = require('./src/pim/routers/custom_field');
 const employeeReportRouter = require('./src/pim/routers/employee_report');
 const workShiftRouter = require('./src/admin/routers/work_shift');
 const organizationRouter = require('./src/admin/routers/organization');
-const leavePeriodRouter = require('./src/leave/routers/leave_period');
-const leaveTypeRouter = require('./src/leave/routers/leave_type');
-const workWeekRouter = require('./src/leave/routers/work_week');
-const holidayRouter = require('./src/leave/routers/holiday');
+
+const vacancyRouter = require('./src/admin/routers/vacancies');
+const applicantRouter = require('./src/admin/routers/applicants');
+//leave
+
+const leavePeriodConfigurationRouter = require('./src/leave/LeavePeriodConfigurationComponent/leavePeriodConfigurationRoute')
+const leaveTypeRouter = require('./src/leave/LeaveTypeComponent/leaveTypeRoute');
+const workWeekRouter = require('./src/leave/WorkWeekComponent/workWeekRoute');
+const holidayRouter = require('./src/leave/HolidayComponent/holidayRoute');
+const leavePeriodRouter = require('./src/leave/LeavePeriodComponent/leavePeriodRoute');
+const leaveEntitlementRouter = require('./src/leave/LeaveEntitlementComponent/leaveEntitlementRoute');
 
 // const chatRouter = require('./src/admin/routers/chat');
 const productRoutes = require("./src/image/controllers/ProfilePic");
@@ -45,7 +53,7 @@ const productRoutes = require("./src/image/controllers/ProfilePic");
 
 
 const app = express();
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 3001;
 const http = require('http').createServer(app)
 // const io = require('socket.io')(http)
 //
@@ -59,6 +67,11 @@ const http = require('http').createServer(app)
 
 app.use(express.json());
 app.use(cors())
+app.use(express.urlencoded({
+    extended: true
+}))
+
+app.set('view engine', 'ejs');
 app.use((err, req, res, next) => {
     if (err instanceof SyntaxError && err.status === 400 && 'body' in err) {
         console.error(err);
@@ -66,6 +79,61 @@ app.use((err, req, res, next) => {
     }
     next();
 });
+
+var request = require("request");
+
+// request.get(
+//     {
+//         url : "http://localhost:3001/vacancies"
+//     },
+//     function (error, response, body) {
+//         // Do more stuff with 'body' here
+//         if (!error && response.statusCode == 200) {
+//             var json_body = JSON.parse(body);
+//             console.log(json_body);
+//             // var msg = json_body.profile.user;//this is the message i want to show on my web page(msg)
+//             // console.log(msg); // get json response
+//         }
+//     }
+// );
+
+app.get('/vacanciesPosts', function(req, res) {
+    let y=[];
+    request.get(
+        {
+            url : "http://localhost:3001/vacancies"
+        },
+        function (error, response, body) {
+            // Do more stuff with 'body' here
+
+            if (!error && response.statusCode == 200) {
+
+                var json_body = JSON.parse(body);
+
+
+                res.render( "pages/Vacancies", {name:json_body});
+            }
+        }
+    );
+
+});
+
+app.post('/vacancyApply', function(req, res) {
+    console.log("x"+req.body.mName)
+    res.render( "pages/VacancyApply",{mn:req.body.mName,mi:req.body.mId});
+
+});
+
+// app.post("http://localhost:3001/applicants",(req,res)=>{
+//     console.log(req.body)
+//     // var name = req.body.name;
+//     // var email = req.body.email;
+//     // var theme = req.body.theme;
+//     // var guest = req.body.theme;
+//     // obj.create({name:name, email:email, theme:theme, guest:guest});
+//     res.redirect("http://localhost:3001/vacanciesPosts");
+// })
+
 app.use(morgan("dev"));
 app.use('/uploads', express.static('uploads'));
 app.use("/products", productRoutes);
@@ -100,10 +168,17 @@ app.use(customFieldRouter);
 app.use(employeeReportRouter);
 app.use(workShiftRouter);
 app.use(organizationRouter);
-app.use(leavePeriodRouter);
+app.use(vacancyRouter);
+app.use(applicantRouter);
+//leave
+
+app.use(leavePeriodConfigurationRouter);
 app.use(leaveTypeRouter);
 app.use(workWeekRouter);
 app.use(holidayRouter);
+app.use(leavePeriodRouter)
+app.use(leaveEntitlementRouter)
+
 // app.use(chatRouter);
 
 

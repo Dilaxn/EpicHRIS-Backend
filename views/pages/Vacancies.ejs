@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+</head>
+<body class="container">
+
+<header>
+</header>
+
+<main>
+    <div class="jumbotron">
+        <h1>WelCome to Epic Job Posting Page</h1>
+        <div style="width: 80%;align-items: center">
+
+            <% name.forEach(function(o) { %>
+                <p><h2> Job Title : <%= o.vacancy_title %></h2></p>
+                <p> Job Description : <%= o.vacancy_description  %></p>
+                <p> Hiring Manager : <%= o.hiring_manager  %></p>
+                <p hidden>Hiring Manager : <%= o.hiring_manager_id  %></p>
+                <form action="http://localhost:3001/vacancyApply" method="post">
+                    <input hidden name="mName" value=<%= o.hiring_manager %>>
+
+                    <input hidden name="mId" value=<%= o.hiring_manager_id %>>
+                    <button type="submit"   > Apply for this job </button>
+                </form>
+              <hr>
+            <% }); %>
+
+        </div>
+
+
+        <p>Welcome to templating using EJS</p>
+    </div>
+</main>
+
+<footer>
+</footer>
+
+</body>
+</html>

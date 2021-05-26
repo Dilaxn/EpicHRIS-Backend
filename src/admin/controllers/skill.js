@@ -38,9 +38,12 @@ const readASkill = async (req, res) => {
 const readAllSkills = async (req, res) => {
     try {
         const skills = await Skill.find({}).select('-__v');
-        if (!skills || skills.length === 0) {
+        if (!skills) {
             res.status(404).send({message: 'not found'});
             return;
+        }
+        else if(skills.length === 0){
+            res.send([]);
         }
 
         res.send(skills);

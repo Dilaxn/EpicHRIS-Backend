@@ -3,7 +3,9 @@ const {Employee} = require('../models/employee');
 const {CustomField} = require('../models/custom_field');
 
 const addASalaryComponentToAnEmployee = async (req, res) => {
+    console.log("salary Compo");
     try {
+        console.log("got it");
         const keys = Object.keys(req.body);
         const allowedCustomKeys = await CustomField.getCustomFieldsName('salary');
         const allowedKeys = ['pay_grade', 'salary_component', 'pay_frequency', 'currency', 'amount',
@@ -90,11 +92,7 @@ const addASalaryComponentToAnEmployee = async (req, res) => {
             select: '-__v'
         }).populate({
             path: 'currency',
-            select: 'min_salary max_salary',
-            populate: {
-                path: 'currency_type',
-                select: 'code currency'
-            }
+            select: '-__v'
         }).execPopulate();
 
         const final = salaryComponent.toObject();

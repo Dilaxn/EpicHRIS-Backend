@@ -38,9 +38,12 @@ const readALicenseType = async (req, res) => {
 const readAllLicenseTypes = async (req, res) => {
     try {
         const licenses = await License.find({}).select('-__v');
-        if (!licenses || licenses.length === 0) {
+        if (!licenses) {
             res.status(404).send({message: 'not found'});
             return;
+        }
+        else if(licenses.length === 0){
+            res.send([]);
         }
 
         res.send(licenses);

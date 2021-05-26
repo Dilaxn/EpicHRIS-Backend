@@ -39,9 +39,12 @@ const readAllJobCategories = async (req, res) => {
     try {
         const jobCategories = await JobCategory.find({}).select('-__v');
 
-        if (!jobCategories || jobCategories.length === 0) {
+        if (!jobCategories) {
             res.status(404).send({message: 'not found'});
             return;
+        }
+        else if(jobCategories.length === 0){
+            res.send([]);
         }
 
         res.send(jobCategories);

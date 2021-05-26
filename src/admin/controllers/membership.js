@@ -38,9 +38,12 @@ const readAMembership = async (req, res) => {
 const readAllMemberships = async (req, res) => {
     try {
         const memberships = await Membership.find({}).select('-__v');
-        if (!memberships || memberships.length === 0) {
+        if (!memberships) {
             res.status(404).send({message: 'not found'});
             return;
+        }
+        else if(memberships.length === 0){
+            res.send([]);
         }
 
         res.send(memberships);

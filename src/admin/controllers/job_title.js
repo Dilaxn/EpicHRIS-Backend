@@ -63,11 +63,13 @@ const readAllJobTitles = async (req, res) => {
     try {
         const jobTitles = await JobTitle.find({}).select('-job_specification.file -__v');
 
-        if (!jobTitles || jobTitles.length === 0) {
+        if (!jobTitles) {
             res.status(404).send({message: 'not found'});
             return;
         }
-
+        else if(jobTitles.length === 0){
+            res.send([]);
+        }
         res.send(jobTitles);
     }catch (e) {
         res.status(500).send(e);

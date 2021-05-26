@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect("mongodb+srv://epic:mmmmmm@cluster0.aet7q.mongodb.net/EpicDeploy", {
+mongoose.connect(process.env.MONGODB_URL, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
@@ -38,8 +38,8 @@ const {insertNationalities} = require('../installer/nationality');
 const {insertReportingMethods} = require('../installer/reporting_method');
 const {insertLocales} = require('../installer/locale');
 const {insertAllMimeTypes} = require('../installer/mime');
-const {setLeavePeriodDefaultConf} = require('../installer/leave_period');
-const {setupWorkWeekDefaultConf} = require('../installer/work_week');
+const {loadLeaveStartUpModules} = require('../installer/leaveModuleLoader');
+// const {setupWorkWeekDefaultConf} = require('../installer/work_week');
 
 
 
@@ -61,8 +61,8 @@ const setUpDatabase = async () => {
         await insertReportingMethods();
         await insertLocales();
         await insertAllMimeTypes();
-        await setLeavePeriodDefaultConf();
-        await setupWorkWeekDefaultConf();
+        await loadLeaveStartUpModules();
+        // await setupWorkWeekDefaultConf();
         console.log('database ready to use');
     }catch (e) {
         console.log(e);

@@ -43,9 +43,12 @@ const getAllPayGrades = async (req, res) => {
     try {
         const payGrades = await PayGrade.find({}).select('-__v');
 
-        if (!payGrades || payGrades.length === 0) {
+        if (!payGrades) {
             res.status(404).send({message: 'not found'});
             return;
+        }
+        else if(payGrades.length === 0){
+            res.send([]);
         }
         const final = [];
         payGrades.forEach((payGrade) => {

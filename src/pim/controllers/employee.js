@@ -16,7 +16,7 @@ const {EidConfiguration} = require('../models/eid_configuration');
 const getOptionalFields = async () => {
     const pimConfiguration = await PimConfiguration.findOne({});
     if (!pimConfiguration) {
-        return null;
+        return null
     }
     const pimConfObj = pimConfiguration.toObject();
     const pimConfKeys = Object.keys(pimConfObj);

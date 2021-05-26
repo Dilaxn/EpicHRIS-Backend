@@ -22,7 +22,7 @@ const salaryComponentSchema = new mongoose.Schema({
     },
     currency: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'PayGradeCurrency',
+        ref: 'Currency',
         required: true
     },
     amount: {
@@ -69,42 +69,42 @@ salaryComponentSchema.set('toObject', {virtuals: true});
 salaryComponentSchema.set('toJSON', {virtuals: true});
 
 
-salaryComponentSchema.pre('save', async function(next) {
-    const salaryComponent = this;
-    if (salaryComponent.pay_grade) {
-        const payGrade = await PayGrade.findById(salaryComponent.pay_grade).populate({
-            path: 'pay_grade_currencies'
-        });
-
-        if (payGrade && payGrade.pay_grade_currencies.length > 0) {
-            if (salaryComponent.currency) {
-                let isValidCurrency = false;
-                let currency;
-                for (const payGradeCurrency of payGrade.pay_grade_currencies) {
-                    if (payGradeCurrency._id.toString() === salaryComponent.currency.toString()) {
-                        isValidCurrency = true;
-                        currency = payGradeCurrency;
-                        break;
-                    }
-                }
-
-                if (!isValidCurrency) {
-                    next(new Error('currency is invalid')) ;
-                }
-
-                if (salaryComponent.amount) {
-                    if (salaryComponent.amount < currency.min_salary || salaryComponent.amount > currency.max_salary) {
-                        next(new Error('amount should be between ' + currency.min_salary + ' and ' + currency.max_salary)) ;
-                    }
-                }
-
-            }
-        }
-    }
-
-    next();
-
-})
+// salaryComponentSchema.pre('save', async function(next) {
+//     const salaryComponent = this;
+//     if (salaryComponent.pay_grade) {
+//         const payGrade = await PayGrade.findById(salaryComponent.pay_grade).populate({
+//             path: 'pay_grade_currencies'
+//         });
+//
+//         if (payGrade && payGrade.pay_grade_currencies.length > 0) {
+//             if (salaryComponent.currency) {
+//                 let isValidCurrency = false;
+//                 let currency;
+//                 for (const payGradeCurrency of payGrade.pay_grade_currencies) {
+//                     if (payGradeCurrency._id.toString() === salaryComponent.currency.toString()) {
+//                         isValidCurrency = true;
+//                         currency = payGradeCurrency;
+//                         break;
+//                     }
+//                 }
+//
+//                 if (!isValidCurrency) {
+//                     next(new Error('currency is invalid')) ;
+//                 }
+//
+//                 if (salaryComponent.amount) {
+//                     if (salaryComponent.amount < currency.min_salary || salaryComponent.amount > currency.max_salary) {
+//                         next(new Error('amount should be between ' + currency.min_salary + ' and ' + currency.max_salary)) ;
+//                     }
+//                 }
+//
+//             }
+//         }
+//     }
+//
+//     next();
+//
+// })
 
 const SalaryComponent = mongoose.model('SalaryComponent', salaryComponentSchema);
 

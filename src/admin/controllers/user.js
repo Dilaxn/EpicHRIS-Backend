@@ -110,7 +110,6 @@ const logout = async (req, res) => {
     }
 }
 
-
 const logoutFromAll = async (req, res) => {
     try {
         req.user.tokens = [];
@@ -427,6 +426,7 @@ const readMyUserDetail = async (req, res) => {
         } else {
             const final = user.toObject();
             // delete final.id;
+            console.log(final)
             res.send(final);
         }
     } catch (e) {

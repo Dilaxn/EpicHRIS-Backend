@@ -40,9 +40,12 @@ const readAllEducationLevel = async (req, res) => {
     try {
         const educationLevels = await EducationLevel.find({}).select('-__v');
 
-        if (!educationLevels || educationLevels.length === 0) {
+        if (!educationLevels) {
             res.status(404).send({message: 'not found'});
             return;
+        }
+        else if(educationLevels.length === 0){
+            res.send([]);
         }
 
         res.send(educationLevels);

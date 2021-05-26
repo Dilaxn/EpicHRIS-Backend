@@ -94,9 +94,14 @@ const readAllDependents = async (req, res, emp_id) => {
             select: '-__v'
         }).select('dependents');
 
-        if (!employee || employee.dependents.length === 0) {
+        if (!employee ) {
             res.status(404).send({message: 'could not found'});
-        } else {
+        }
+        else if(employee.dependents.length === 0){
+            res.send([]);
+        }
+
+        else {
             let final = {};
             final.employee_id = employee._id;
             final.dependents = [];
