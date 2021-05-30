@@ -90,6 +90,13 @@ class LeavePeriodService {
         }
         return {success: true, data: leavePeriods};
     }
+    async findLeavePeriod(id) {
+        const leavePeriod = await LeavePeriod.findById(id);
+        if (!leavePeriod) {
+            return null;
+        }
+        return leavePeriod;
+    }
 }
 
 module.exports = LeavePeriodService;

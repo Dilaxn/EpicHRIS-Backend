@@ -45,6 +45,8 @@ const workWeekRouter = require('./src/leave/WorkWeekComponent/workWeekRoute');
 const holidayRouter = require('./src/leave/HolidayComponent/holidayRoute');
 const leavePeriodRouter = require('./src/leave/LeavePeriodComponent/leavePeriodRoute');
 const leaveEntitlementRouter = require('./src/leave/LeaveEntitlementComponent/leaveEntitlementRoute');
+const leaveRouter = require('./src/leave/LeaveComponent/leaveRoute');
+const attendanceRoute = require('./src/time/AttendanceComponent/attendanceRoute');
 
 // const chatRouter = require('./src/admin/routers/chat');
 const productRoutes = require("./src/image/controllers/ProfilePic");
@@ -55,6 +57,7 @@ const productRoutes = require("./src/image/controllers/ProfilePic");
 const app = express();
 const port = process.env.PORT || 3001;
 const http = require('http').createServer(app)
+app.disable('etag');
 // const io = require('socket.io')(http)
 //
 //
@@ -178,6 +181,9 @@ app.use(workWeekRouter);
 app.use(holidayRouter);
 app.use(leavePeriodRouter)
 app.use(leaveEntitlementRouter)
+app.use(leaveRouter);
+app.use(attendanceRoute);
+
 
 // app.use(chatRouter);
 

@@ -6,7 +6,6 @@ const leaveTypeService = new LeaveTypeService();
 const router = new express.Router();
 router.post('/leaveTypes', isAdmin, async (req, res) => {
     try {
-        console.log(req.body)
         const added = await leaveTypeService.addALeaveType(req.body);
         res.status(201).send({success: true, added});
     }catch (e) {

@@ -1,11 +1,8 @@
 const {LeaveType} = require('./leaveTypeModel');
 class LeaveTypeService {
     async addALeaveType(leaveTypeObject) {
-        console.log(leaveTypeObject)
         const leaveType = new LeaveType(leaveTypeObject);
-        console.log("leaveType")
         await leaveType.save();
-        console.log(leaveType)
         return leaveType;
     }
     async readAllLeaveTypes() {

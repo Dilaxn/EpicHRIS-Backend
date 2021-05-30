@@ -5,6 +5,16 @@ class LeaveEntitlementService {
     constructor() {
         this.#allowedKeys = ['leaveType', 'leavePeriod', 'entitlement', 'employee'];
     }
+    async getEntitlement(_id, employee) {
+        const entitlement = await Entitlement.findOne({_id, employee});
+        if (!entitlement) {
+            return null;
+        }
+        return entitlement;
+    }
+    async increaseLeaveTaken(id, incrementBy) {
+        await Entitlement.findByIdAndUpdate(id, {$inc: {leaveTaken: incrementBy}});
+    }
     async addAnEntitlement(entitlement) {
         if (typeof entitlement === 'object' && entitlement !== null) {
             const keys = Object.keys(entitlement);

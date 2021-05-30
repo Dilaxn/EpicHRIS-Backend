@@ -7,6 +7,10 @@ const router = new express.Router();
 router.post('/holidays', isAdmin, async (req, res) => {
     try {
         const added = await holidayService.addAHoliday(req.body);
+        if (!added) {
+            res.status(400).send(added);
+            return;
+        }
         res.status(201).send({success: true, added});
     }catch (e) {
         res.status(400).send({success: false, err: e.message});

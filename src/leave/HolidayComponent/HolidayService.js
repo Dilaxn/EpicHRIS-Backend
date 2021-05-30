@@ -1,3 +1,4 @@
+const moment = require('moment');
 const {Holiday} = require('./holidayModel');
 class HolidayService {
     async addAHoliday(holidayToAdd) {
@@ -7,6 +8,20 @@ class HolidayService {
         await holiday.save();
         return holiday;
     }
+    async getHoliday(date) {
+        const dateMoment = moment(date, 'YYYY-MM-DD');
+        if (!dateMoment.isValid()) {
+            return [];
+        }
+        const $gte = dateMoment.clone().startOf('day').toDate();
+        const $lte = dateMoment.clone().endOf('day').toDate();
+        const holiday = await Holiday.find({holidayDate: {$gte, $lte}});
+        if (holiday.length === 0) {
+            return [];
+        }
+        return holiday;
+    }
+
     async queryHoliday(options) {
         let filter = {};
         if (options.from) {

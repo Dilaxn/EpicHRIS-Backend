@@ -1,9 +1,11 @@
 const LeavePeriodConfigurationService = require('../src/leave/LeavePeriodConfigurationComponent/LeavePeriodConfigurationService');
 const LeavePeriodService = require('../src/leave/LeavePeriodComponent/LeavePeriodService');
 const LeaveTypeService = require('../src/leave/LeaveTypeComponent/LeaveTypeService');
+const WorkWeekService = require('../src/leave/WorkWeekComponent/WorkWeekService');
 const leavePeriodConfigurationService = new LeavePeriodConfigurationService();
 const leavePeriodService = new LeavePeriodService();
 const leaveTypeService = new LeaveTypeService();
+const workWeekService = new WorkWeekService();
 const loadLeaveStartUpModules = async () => {
     const leavePeriodConfiguration = await leavePeriodConfigurationService.initializeLeavePeriodConfiguration();
     if (leavePeriodConfiguration) {
@@ -25,6 +27,12 @@ const loadLeaveStartUpModules = async () => {
         console.log('default deleted leave type added');
     }else {
         console.log('default deleted leave type exist');
+    }
+    const workDayConf = await workWeekService.initializeWorkDayConfiguration();
+    if (workDayConf) {
+        console.log('work day configuration added');
+    }else {
+        console.log('work day configuration already exist');
     }
 
 }

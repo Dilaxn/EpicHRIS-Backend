@@ -44,10 +44,8 @@ leaveTypeSchema.pre('save', async function(next) {
     const defaultLeaveType = await LeaveType.findOne({leaveTypeName: 'deleted'});
     if (defaultLeaveType) {
         if (doc._id.equals(defaultLeaveType._id)) {
-
             next(new Error('default deleted leave type can not be modified'));
         }
-
     }
     next();
 })

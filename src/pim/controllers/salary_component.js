@@ -141,6 +141,7 @@ const readASalaryComponent = async (req, res, emp_id) => {
 }
 
 const readASalaryComponentOfMine = async (req, res) => {
+    console.log( req.user.employee)
     await readASalaryComponent(req, res, req.user.employee);
 }
 
@@ -181,6 +182,8 @@ const readAllSalaryComponents = async (req, res, emp_id) => {
 }
 
 const readMyAllSalaryComponents = async (req, res) => {
+    // console.log( req.user)
+
     await readAllSalaryComponents(req, res, req.user.employee);
 }
 
