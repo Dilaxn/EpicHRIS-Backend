@@ -16,7 +16,7 @@ router.get('/projects', auth, async (req, res) => {
     try {
         const found = await projectService.queryProject(req.query);
         if (!found.success) {
-            res.status(404).send(found);
+            res.status(200).send(found);
             return;
         }
         res.status(200).send(found);

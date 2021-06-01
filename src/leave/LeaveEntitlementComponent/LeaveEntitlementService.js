@@ -82,7 +82,7 @@ class LeaveEntitlementService {
             select: 'isEntitlementSituational leaveTypeName startDate endDate status first_name last_name employee_id'
         });
         if (entitlements.length === 0) {
-            return {success: false, message: 'could not found'};
+            return {success: true, data: []};
         }
         return {success: true, data: entitlements};
     }

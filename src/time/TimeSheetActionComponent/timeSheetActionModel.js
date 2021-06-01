@@ -1,9 +1,11 @@
 const mongoose = require('mongoose');
+const moment = require('moment');
+const idValidator = require('mongoose-id-validator');
 const timeSheetActionSchema = new mongoose.Schema({
     action: {
         type: String,
         required: true,
-        enum: ['submitted', 'approved', 'rejected', 'reset']
+        enum: ['updated', 'submitted', 'approved', 'rejected', 'reset']
     },
     performedBy: {
         type: mongoose.Schema.Types.ObjectId,
@@ -12,12 +14,14 @@ const timeSheetActionSchema = new mongoose.Schema({
     },
     dateOfAction: {
         type: Date,
-        default: Date.now,
+        default: moment().toDate(),
         required: true
     },
     comment: {
-        type: String
+        type: String,
+        maxlength: 500
     }
-});
+}, {versionKey: false});
+timeSheetActionSchema.plugin(idValidator);
 const TimeSheetAction = mongoose.model('TimeSheetAction', timeSheetActionSchema);
 module.exports = {timeSheetActionSchema, TimeSheetAction};

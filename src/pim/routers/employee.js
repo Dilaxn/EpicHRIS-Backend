@@ -39,6 +39,7 @@ const {addMyMembership, addAMembershipToAnEmployee, readMyMembership, readAMembe
 const {addMyAttachment, addAnAttachmentOfEmployee, readMyAttachment, readAnAttachmentOfAnEmployee,
     readAllMyAttachmentsForAScreen, readAllAttachmentsOfAScreenForAnEmployee, updateMyAttachment,
     updateAttachmentOfAnEmployee, deleteMyAttachments, deleteAttachmentsOfAnEmployee} = require('../controllers/attachment');
+const {checkSupervisor} = require('../controllers/checkSupervisor');
 
 
 const {pdfUpload, profilePicUpload, employeeUpload, attachmentUpload} = require('../../../middleware/file_upload');
@@ -56,7 +57,7 @@ router.get('/employees/me/personal_detail', auth, readMyPersonalDetail );
 router.get('/employees/:emp_id/personal_detail', supervisorOrAdmin, readEmployeePersonalDetail);
 router.patch('/employees/me/personal_detail', auth, updateMyPersonalDetail);
 router.patch('/employees/:emp_id/personal_detail', supervisorOrAdmin, updateEmployeePersonalDetail);
-router.get('/employees/:emp_id/avatar', auth, readAProfilePicture);
+router.get('/employees/:emp_id/avatar', readAProfilePicture);
 router.patch('/employees/me/avatar', auth, profilePicUpload.single('avatar'), updateMyProfilePicture, error);
 router.patch('/employees/:emp_id/avatar', supervisorOrAdmin, profilePicUpload.single('avatar'), updateAnEmployeeProfilePicture, error);
 router.delete('/employees', isAdmin, deleteEmployees);
@@ -212,4 +213,7 @@ router.patch('/employees/me/:screen/attachments/:id', auth, attachmentUpload.sin
 router.patch('/employees/:emp_id/:screen/attachments/:id', supervisorOrAdmin, attachmentUpload.single('attachment'), updateAttachmentOfAnEmployee);
 router.delete('/employees/me/:screen/attachments', auth, deleteMyAttachments);
 router.delete('/employees/:emp_id/:screen/attachments', supervisorOrAdmin, deleteAttachmentsOfAnEmployee);
+router.get('/employees/checkSupervisor', supervisorOrAdmin, checkSupervisor);
+
+
 module.exports = router;

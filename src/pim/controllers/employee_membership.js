@@ -120,9 +120,12 @@ const readAllMemberships = async (req, res, emp_id) => {
             }
         }).select('memberships');
 
-        if (!employee || !employee.memberships || employee.memberships.length === 0) {
+        if (!employee || !employee.memberships ) {
             res.status(404).send({message: 'not found'});
             return;
+        }
+        else if(employee.memberships.length === 0){
+            res.send([]);
         }
         const final = employee.toObject();
         delete final.id;

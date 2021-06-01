@@ -47,10 +47,13 @@ const leavePeriodRouter = require('./src/leave/LeavePeriodComponent/leavePeriodR
 const leaveEntitlementRouter = require('./src/leave/LeaveEntitlementComponent/leaveEntitlementRoute');
 const leaveRouter = require('./src/leave/LeaveComponent/leaveRoute');
 const attendanceRoute = require('./src/time/AttendanceComponent/attendanceRoute');
-
+const customerRouter = require('./src/time/CustomentComponent/customerRoute');
+const projectRouter = require('./src/time/ProjectComponent/projectRoute');
+const projectActivityRouter = require('./src/time/ProjectActivityComponent/projectActivityRoute');
 // const chatRouter = require('./src/admin/routers/chat');
 const productRoutes = require("./src/image/controllers/ProfilePic");
-
+const timeSheetWeekRouter = require('./src/time/TimeSheetWeekComponent/timeSheetWeekRoute');
+const timeSheetRouter = require('./src/time/TimeSheetComponent/timeSheetRoute');
 // const testRouter = require('./playground/test');
 
 
@@ -184,7 +187,11 @@ app.use(leaveEntitlementRouter)
 app.use(leaveRouter);
 app.use(attendanceRoute);
 
-
+app.use(customerRouter);
+app.use(projectRouter);
+app.use(projectActivityRouter);
+app.use(timeSheetWeekRouter);
+app.use(timeSheetRouter);
 // app.use(chatRouter);
 
 
