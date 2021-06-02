@@ -264,6 +264,7 @@ const deleteSubordinate = async (req, res) => {
 
 const readSubordinates = async (req, res, emp_id) => {
     try {
+        console.log("empid"+emp_id)
         const employee = await Employee.findById(emp_id).populate({
             path: 'subordinates',
             populate: {

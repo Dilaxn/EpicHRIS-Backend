@@ -14,6 +14,7 @@ const supervisorOrAdmin = async (req, res, next) => {
         if (user.role === 'admin') {
             req.token = token;
             req.user = user;
+            console.log("jiii")
             next();
         }else{
             const employee = await Employee.findById(user.employee).populate({
@@ -29,6 +30,7 @@ const supervisorOrAdmin = async (req, res, next) => {
                 if (reportTo.subordinate.toString() === req.params.emp_id) {
                     req.token = token;
                     req.user = user;
+                    console.log("yeah got it")
                     next();
                 }else {
                     throw new Error();

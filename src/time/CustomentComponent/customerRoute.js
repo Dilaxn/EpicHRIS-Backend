@@ -1,6 +1,7 @@
 const express = require('express');
 const isAdmin = require('../../../middleware/admin');
 const CustomerService = require('./CustomerService');
+const supervisorOrAdmin = require("../../../../src-2021-05-27/middleware/supervisor_or_admin");
 const customerService = new CustomerService();
 const router = new express.Router();
 router.post('/customers', isAdmin, async (req, res) => {
@@ -11,7 +12,7 @@ router.post('/customers', isAdmin, async (req, res) => {
         res.status(500).send({success: false, err: e.message});
     }
 });
-router.get('/Customers', isAdmin, async (req, res) => {
+router.get('/Customers', supervisorOrAdmin, async (req, res) => {
     try {
         const customers = await customerService.getCustomers();
         if (!customers.success) {

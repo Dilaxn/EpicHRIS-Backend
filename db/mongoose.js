@@ -39,6 +39,8 @@ const {insertReportingMethods} = require('../installer/reporting_method');
 const {insertLocales} = require('../installer/locale');
 const {insertAllMimeTypes} = require('../installer/mime');
 const {loadLeaveStartUpModules} = require('../installer/leaveModuleLoader');
+const {loadTimeStartupModules} = require('../installer/timeModuleLoader');
+
 // const {setupWorkWeekDefaultConf} = require('../installer/work_week');
 
 
@@ -62,6 +64,8 @@ const setUpDatabase = async () => {
         await insertLocales();
         await insertAllMimeTypes();
         await loadLeaveStartUpModules();
+        await loadTimeStartupModules();
+
         // await setupWorkWeekDefaultConf();
         console.log('database ready to use');
     }catch (e) {
