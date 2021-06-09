@@ -32,7 +32,7 @@ class TimeSheetWeekService {
         }
         const weeks = await TimeSheetWeek.find(filter).sort('-endDate');
         if (weeks.length === 0) {
-            return {success: false, message: 'could not found'}
+            return {success: true, data: []};
         }
         return {success: true, data: weeks};
     }

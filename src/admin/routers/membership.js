@@ -7,9 +7,9 @@ const {addAMembership, readAMembership, readAllMemberships, updateAMembership, d
 const router = new express.Router();
 
 
-router.post('/memberships', isAdmin, addAMembership);
-router.get('/memberships/:id', auth, readAMembership);
-router.get('/memberships', auth, readAllMemberships);
-router.patch('/memberships/:id', isAdmin, updateAMembership);
-router.delete('/memberships', isAdmin, deleteMemberships);
+router.post('/api/memberships', isAdmin, addAMembership);
+router.get('/api/memberships/:id', auth, readAMembership);
+router.get('/api/memberships', auth, readAllMemberships);
+router.patch('/api/memberships/:id', isAdmin, updateAMembership);
+router.delete('/api/memberships', isAdmin, deleteMemberships);
 module.exports = router;

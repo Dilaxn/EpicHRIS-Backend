@@ -6,5 +6,5 @@ const {readAllLanguageCompetencies} = require('../controllers/language_competenc
 const router = new express.Router();
 
 
-router.get('/language_competencies', auth, readAllLanguageCompetencies);
+router.get('/api/language_competencies', auth, readAllLanguageCompetencies);
 module.exports = router;

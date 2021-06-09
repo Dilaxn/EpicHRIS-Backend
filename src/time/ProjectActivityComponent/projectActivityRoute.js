@@ -3,7 +3,7 @@ const auth = require('../../../middleware/auth');
 const router = new express.Router();
 const ProjectActivityService = require('./ProjectActivityService');
 const projectActivityService = new ProjectActivityService();
-router.post('/projects/:id/projectActivities', auth, async (req, res) => {
+router.post('/api/projects/:id/projectActivities', auth, async (req, res) => {
     try {
         const added = await projectActivityService.addProjectActivity(req.params.id, req.body, req.user);
         if (!added.success) {
@@ -15,7 +15,7 @@ router.post('/projects/:id/projectActivities', auth, async (req, res) => {
         res.status(500).send({success: false, err: e.message});
     }
 });
-router.post('/projectActivities/copyFrom/:copyFrom/copyTo/:copyTo', auth, async (req, res) => {
+router.post('/api/projectActivities/copyFrom/:copyFrom/copyTo/:copyTo', auth, async (req, res) => {
     try {
         const result = await projectActivityService.copyProjectActivity(req.params.copyTo, req.params.copyFrom, req.user);
         if (!result.success) {
@@ -27,7 +27,7 @@ router.post('/projectActivities/copyFrom/:copyFrom/copyTo/:copyTo', auth, async 
         res.status(500).send({success: false, err: e.message});
     }
 });
-router.get('/projects/:id/activities', auth, async (req, res) => {
+router.get('/api/projects/:id/activities', auth, async (req, res) => {
     try {
         const found = await projectActivityService.getProjectActivities(req.params.id);
         if (!found.success) {
@@ -39,7 +39,7 @@ router.get('/projects/:id/activities', auth, async (req, res) => {
         res.status(500).send({success: false, err: e.message});
     }
 })
-router.patch('/projects/:projectId/activities/:id', auth, async (req, res) => {
+router.patch('/api/projects/:projectId/activities/:id', auth, async (req, res) => {
     try {
         const updated = await projectActivityService.updateProject(req.params.projectId, req.params.id, req.user, req.body.activityName);
         if (!updated.success) {
@@ -51,7 +51,7 @@ router.patch('/projects/:projectId/activities/:id', auth, async (req, res) => {
         res.status(500).send({success: false, err: e.message});
     }
 })
-router.delete('/projects/:id/activities', auth, async (req, res) => {
+router.delete('/api/projects/:id/activities', auth, async (req, res) => {
     try {
         const deleted = await projectActivityService.deleteProjectActivities(req.params.id, req.user, req.body.id);
         if (!deleted.success) {

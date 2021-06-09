@@ -6,8 +6,8 @@ const {addAnBankAccountType, getAllBankAccountType, deleteBankAccountTypes} = re
 
 const router = new express.Router();
 
-router.post('/bank_account_types', isAdmin, addAnBankAccountType);
-router.get('/bank_account_types', auth, getAllBankAccountType);
-router.delete('/bank_account_types', isAdmin, deleteBankAccountTypes);
+router.post('/api/bank_account_types', isAdmin, addAnBankAccountType);
+router.get('/api/bank_account_types', auth, getAllBankAccountType);
+router.delete('/api/bank_account_types', isAdmin, deleteBankAccountTypes);
 
 module.exports = router;

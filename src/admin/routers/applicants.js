@@ -6,9 +6,9 @@ const {addApplicant, readApplicant, readAllApplicants, deleteApplicants} = requi
 const router = new express.Router();
 
 
-router.post('/applicant', addApplicant);
-router.get('/applicant/:id', isAdmin, readApplicant);
-router.get('/applicants',auth, readAllApplicants);
-// router.patch('/skills/:id', isAdmin, updateASkill);
-router.delete('/applicant', auth, deleteApplicants);
+router.post('/api/applicant', addApplicant);
+router.get('/api/applicant/:id', isAdmin, readApplicant);
+router.get('/api/applicants',auth, readAllApplicants);
+// router.patch('/api/skills/:id', isAdmin, updateASkill);
+router.delete('/api/applicant', auth, deleteApplicants);
 module.exports = router;

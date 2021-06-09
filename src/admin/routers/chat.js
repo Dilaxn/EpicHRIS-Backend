@@ -6,9 +6,9 @@ const {addChat,readAllChats} = require('../controllers/chat');
 const router = new express.Router();
 
 
-router.post('/chat', addChat);
-router.get('/chats',readAllChats);
+router.post('/api/chat', addChat);
+router.get('/api/chats',readAllChats);
 
-// router.get('/skills/:id', auth, readChat);
+// router.get('/api/skills/:id', auth, readChat);
 
 module.exports = router;

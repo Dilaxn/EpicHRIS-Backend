@@ -3,7 +3,7 @@ const auth = require('../../../middleware/auth');
 const TimeSheetWeekService = require('./TimeSheetWeekService');
 const timeSheetWeekService = new TimeSheetWeekService();
 const router = new express.Router();
-router.get('/timeSheetWeeks', auth, async (req, res) =>{
+router.get('/api/timeSheetWeeks', auth, async (req, res) =>{
     try {
         const timeSheetWeeks = await timeSheetWeekService.getTimeSheet(req.query);
         if (!timeSheetWeeks.success) {

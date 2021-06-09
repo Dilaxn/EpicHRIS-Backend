@@ -3,7 +3,7 @@ const isAuth = require('../../../middleware/auth');
 const LeavePeriodService = require('./LeavePeriodService');
 const leavePeriodService = new LeavePeriodService();
 const router = new express.Router();
-router.get('/leavePeriods', isAuth, async (req, res) => {
+router.get('/api/leavePeriods', isAuth, async (req, res) => {
     try {
         const result = await leavePeriodService.getAllLeavePeriods();
         if (!result.success) {

@@ -4,7 +4,7 @@ const isAdmin = require('../../../middleware/admin');
 const auth = require('../../../middleware/auth');
 const holidayService = new HolidayService();
 const router = new express.Router();
-router.post('/holidays', isAdmin, async (req, res) => {
+router.post('/api/holidays', isAdmin, async (req, res) => {
     try {
         const added = await holidayService.addAHoliday(req.body);
         if (!added) {
@@ -16,7 +16,7 @@ router.post('/holidays', isAdmin, async (req, res) => {
         res.status(400).send({success: false, err: e.message});
     }
 });
-router.get('/holidays', auth, async (req, res) => {
+router.get('/api/holidays', auth, async (req, res) => {
     try {
         const holidays = await holidayService.queryHoliday(req.body);
         res.status(200).send({success: true, holidays})
@@ -25,7 +25,7 @@ router.get('/holidays', auth, async (req, res) => {
         res.status(errCode).send({success: false, err: e.message});
     }
 });
-router.patch('/holidays/:id', isAdmin, async (req, res) => {
+router.patch('/api/holidays/:id', isAdmin, async (req, res) => {
     try {
         const updated = await holidayService.updateAHoliday(req.params.id, req.body);
         res.status(200).send({success: false, updated});
@@ -34,7 +34,7 @@ router.patch('/holidays/:id', isAdmin, async (req, res) => {
         res.status(errCode).send({success: false, err: e.message});
     }
 })
-router.delete('/holidays', isAdmin, async (req, res) => {
+router.delete('/api/holidays', isAdmin, async (req, res) => {
     try {
         const deleted = await holidayService.deleteHolidays(req.body);
         res.status(200).send({success: true, deleted});

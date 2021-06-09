@@ -7,11 +7,11 @@ const {addAJobCategory, readAJobCategory, readAllJobCategories, updateAJobCatego
 
 const router = new express.Router();
 
-router.post('/job_categories', isAdmin, addAJobCategory);
-router.get('/job_categories/:job_category_id', auth, readAJobCategory);
-router.get('/job_categories', auth, readAllJobCategories);
-router.patch('/job_categories/:job_category_id', isAdmin, updateAJobCategory);
-router.delete('/job_categories', isAdmin, deleteJobCategories);
+router.post('/api/job_categories', isAdmin, addAJobCategory);
+router.get('/api/job_categories/:job_category_id', auth, readAJobCategory);
+router.get('/api/job_categories', auth, readAllJobCategories);
+router.patch('/api/job_categories/:job_category_id', isAdmin, updateAJobCategory);
+router.delete('/api/job_categories', isAdmin, deleteJobCategories);
 
 
 module.exports = router;

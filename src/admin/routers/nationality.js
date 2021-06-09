@@ -4,7 +4,7 @@ const auth = require('../../../middleware/auth');
 const {addANationality, readAllNationalities, deleteNationalities} = require('../controllers/nationalities');
 const router = new express.Router();
 
-router.post('/nationalities', isAdmin, addANationality);
-router.get('/nationalities', auth, readAllNationalities);
-router.delete('/nationalities', isAdmin, deleteNationalities);
+router.post('/api/api/nationalities', isAdmin, addANationality);
+router.get('/api/api/nationalities', auth, readAllNationalities);
+router.delete('/api/api/nationalities', isAdmin, deleteNationalities);
 module.exports = router;

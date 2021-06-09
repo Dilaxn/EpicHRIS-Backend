@@ -8,11 +8,11 @@ const { addAnOrganizationUnit, readAnOrganizationUnit, readAllOrganizationUnits,
 
 const router = new express.Router();
 
-router.post('/organization_units', isAdmin, addAnOrganizationUnit);
-router.get('/organization_units/:id', auth, readAnOrganizationUnit);
-router.get('/organization_units', auth, readAllOrganizationUnits);
-router.get('/organization_units/:id/populate', auth, readAPopulateOrganizationUnit);
-router.patch('/organization_units/:id', isAdmin, updateAnOrganizationUnit);
-router.delete('/organization_units/:id', isAdmin, deleteAnOrganizationUnit);
+router.post('/api/organization_units', isAdmin, addAnOrganizationUnit);
+router.get('/api/organization_units/:id', auth, readAnOrganizationUnit);
+router.get('/api/organization_units', auth, readAllOrganizationUnits);
+router.get('/api/organization_units/:id/populate', auth, readAPopulateOrganizationUnit);
+router.patch('/api/organization_units/:id', isAdmin, updateAnOrganizationUnit);
+router.delete('/api/organization_units/:id', isAdmin, deleteAnOrganizationUnit);
 
 module.exports = router;

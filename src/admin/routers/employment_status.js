@@ -7,11 +7,11 @@ const {addAnEmploymentStatus, readAnEmploymentStatus, readAllEmploymentStatus, u
 
 const router = new express.Router();
 
-router.post('/employment_status', isAdmin, addAnEmploymentStatus);
-router.get('/employment_status/:employment_status_id', auth, readAnEmploymentStatus);
-router.get('/employment_status', auth, readAllEmploymentStatus);
-router.patch('/employment_status/:employment_status_id', isAdmin, updateAnEmployment_Status);
-router.delete('/employment_status', isAdmin, deleteEmploymentStatuses);
+router.post('/api/employment_status', isAdmin, addAnEmploymentStatus);
+router.get('/api/employment_status/:employment_status_id', auth, readAnEmploymentStatus);
+router.get('/api/employment_status', auth, readAllEmploymentStatus);
+router.patch('/api/employment_status/:employment_status_id', isAdmin, updateAnEmployment_Status);
+router.delete('/api/employment_status', isAdmin, deleteEmploymentStatuses);
 
 
 module.exports = router;

@@ -7,11 +7,11 @@ const {addALocation, readALocation, queryLocations, updateALocation, deleteMulti
 const router = new express.Router();
 
 
-router.post('/location', isAdmin, addALocation);
-router.get('/locations', auth, queryLocations);
-router.get('/location/:id', auth, readALocation);
-router.patch('/location/:id', isAdmin, updateALocation);
-router.delete('/location', isAdmin, deleteMultipleLocation);
+router.post('/api/location', isAdmin, addALocation);
+router.get('/api/locations', auth, queryLocations);
+router.get('/api/location/:id', auth, readALocation);
+router.patch('/api/location/:id', isAdmin, updateALocation);
+router.delete('/api/location', isAdmin, deleteMultipleLocation);
 
 
 module.exports = router;

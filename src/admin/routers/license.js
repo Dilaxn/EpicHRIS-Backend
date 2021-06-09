@@ -7,10 +7,10 @@ const {addALicenseType, readALicenseType, readAllLicenseTypes, updateALicenseTyp
 
 const router = new express.Router();
 
-router.post('/licenses', isAdmin, addALicenseType);
-router.get('/licenses/:id', auth, readALicenseType);
-router.get('/licenses', auth, readAllLicenseTypes);
-router.patch('/licenses/:id', isAdmin, updateALicenseType);
-router.delete('/licenses', isAdmin, deleteLicenseTypes);
+router.post('/api/licenses', isAdmin, addALicenseType);
+router.get('/api/licenses/:id', auth, readALicenseType);
+router.get('/api/licenses', auth, readAllLicenseTypes);
+router.patch('/api/licenses/:id', isAdmin, updateALicenseType);
+router.delete('/api/licenses', isAdmin, deleteLicenseTypes);
 
 module.exports = router;

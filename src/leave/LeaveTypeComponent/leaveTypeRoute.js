@@ -4,7 +4,7 @@ const auth = require('../../../middleware/auth');
 const LeaveTypeService = require('./LeaveTypeService');
 const leaveTypeService = new LeaveTypeService();
 const router = new express.Router();
-router.post('/leaveTypes', isAdmin, async (req, res) => {
+router.post('/api/leaveTypes', isAdmin, async (req, res) => {
     try {
         const added = await leaveTypeService.addALeaveType(req.body);
         res.status(201).send({success: true, added});
@@ -12,7 +12,7 @@ router.post('/leaveTypes', isAdmin, async (req, res) => {
         res.status(500).send({success: false, err: e.message})
     }
 });
-router.get('/leaveTypes', auth, async (req, res) => {
+router.get('/api/leaveTypes', auth, async (req, res) => {
     try {
         const found = await leaveTypeService.readAllLeaveTypes();
         if (!found.success) {
@@ -24,7 +24,7 @@ router.get('/leaveTypes', auth, async (req, res) => {
         res.status(500).send({success: false, err: e.message})
     }
 })
-router.patch('/leaveTypes/:id', isAdmin, async (req, res) => {
+router.patch('/api/leaveTypes/:id', isAdmin, async (req, res) => {
     try {
         const updated = await leaveTypeService.updateALeaveType(req.params.id, req.body);
         if (!updated.success) {
@@ -36,7 +36,7 @@ router.patch('/leaveTypes/:id', isAdmin, async (req, res) => {
         res.status(500).send({success: false, err: e.message});
     }
 });
-router.delete('/leaveTypes', isAdmin, async (req, res) => {
+router.delete('/api/leaveTypes', isAdmin, async (req, res) => {
     try {
         const deleted = await leaveTypeService.deleteLeaveTypes(req.body);
         if (!deleted.success) {

@@ -4,7 +4,7 @@ const auth = require('../../../middleware/auth');
 const ProjectService = require('./ProjectService');
 const projectService = new ProjectService();
 const router = new express.Router();
-router.post('/projects', isAdmin, async (req, res) => {
+router.post('/api/projects', isAdmin, async (req, res) => {
     try {
         const added = await projectService.addProject(req.body);
         res.status(201).send(added);
@@ -12,7 +12,7 @@ router.post('/projects', isAdmin, async (req, res) => {
         res.status(500).send({success: false, err: e.message});
     }
 });
-router.get('/projects', auth, async (req, res) => {
+router.get('/api/projects', auth, async (req, res) => {
     try {
         const found = await projectService.queryProject(req.query);
         if (!found.success) {
@@ -24,7 +24,7 @@ router.get('/projects', auth, async (req, res) => {
         res.status(500).send({success: false, err: e.message});
     }
 })
-router.patch('/projects/:id', isAdmin, async (req, res) => {
+router.patch('/api/projects/:id', isAdmin, async (req, res) => {
     try {
         const updated = await projectService.updateAProject(req.params.id, req.body);
         if (!updated.success) {
@@ -36,7 +36,7 @@ router.patch('/projects/:id', isAdmin, async (req, res) => {
         res.status(500).send({success: false, err: e.message});
     }
 });
-router.delete('/projects', isAdmin, async (req, res) => {
+router.delete('/api/projects', isAdmin, async (req, res) => {
     try {
         const deleted = await projectService.deleteProjects(req.body.id);
         if (!deleted.success) {

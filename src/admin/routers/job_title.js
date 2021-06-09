@@ -9,12 +9,12 @@ const {pdfUpload} = require('../../../middleware/file_upload');
 const router = new express.Router();
 
 
-router.post('/job_titles', isAdmin, pdfUpload.single('job_specification'), addAJobTitle, error);
-router.get('/job_titles/:job_title_id', auth, readAJobTitle);
-router.get('/job_titles/:job_title_id/job_specification', readJobSpecification);
-router.get('/job_titles', auth, readAllJobTitles);
-router.patch('/job_titles/:job_title_id', isAdmin, pdfUpload.single('job_specification'), updateAJobTitle, error);
-router.delete('/job_titles', isAdmin, deleteMultipleJobTiles)
+router.post('/api/job_titles', isAdmin, pdfUpload.single('job_specification'), addAJobTitle, error);
+router.get('/api/job_titles/:job_title_id', auth, readAJobTitle);
+router.get('/api/job_titles/:job_title_id/job_specification', readJobSpecification);
+router.get('/api/job_titles', auth, readAllJobTitles);
+router.patch('/api/job_titles/:job_title_id', isAdmin, pdfUpload.single('job_specification'), updateAJobTitle, error);
+router.delete('/api/job_titles', isAdmin, deleteMultipleJobTiles)
 
 
 module.exports = router;

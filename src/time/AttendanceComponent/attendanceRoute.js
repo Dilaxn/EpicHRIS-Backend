@@ -5,7 +5,7 @@ const AttendanceService = require('./AttendanceService');
 const attendanceService = new AttendanceService();
 const router = new express.Router();
 //my route
-router.get('/attendance/check', auth, async (req, res) => {
+router.get('/api/attendance/check', auth, async (req, res) => {
     try {
         const check = await attendanceService.isPunchedIn(req.user.employee);
         if (!check) {
@@ -19,7 +19,7 @@ router.get('/attendance/check', auth, async (req, res) => {
 });
 
 
-router.post('/attendance/punchIn', auth, async (req, res) => {
+router.post('/api/attendance/punchIn', auth, async (req, res) => {
     try {
         const attendance = await attendanceService.punchIn(req.user.employee, req.body.note);
         if (!attendance.success) {
@@ -31,7 +31,7 @@ router.post('/attendance/punchIn', auth, async (req, res) => {
         res.status(500).send({success: false, err: e.message});
     }
 });
-router.patch('/attendance/punchOut', auth, async (req, res) => {
+router.patch('/api/attendance/punchOut', auth, async (req, res) => {
     try {
         const punchedOut = await attendanceService.punchOut(req.user.employee, req.body.note);
         if (!punchedOut.success) {
@@ -43,7 +43,7 @@ router.patch('/attendance/punchOut', auth, async (req, res) => {
         res.status(500).send({success: false, err: e.message});
     }
 });
-router.post('/employee/:emp_id/attendance', supervisorOrAdmin, async (req, res) => {
+router.post('/api/employee/:emp_id/attendance', supervisorOrAdmin, async (req, res) => {
     try {
         const added = await attendanceService.addAnAttendance(req.params.emp_id, req.body, req.user.employee);
         if (!added.success) {
@@ -55,7 +55,7 @@ router.post('/employee/:emp_id/attendance', supervisorOrAdmin, async (req, res) 
         res.status(500).send({success: false, err: e.message});
     }
 });
-router.patch('/employee/:emp_id/attendance/:id', supervisorOrAdmin, async (req, res) => {
+router.patch('/api/employee/:emp_id/attendance/:id', supervisorOrAdmin, async (req, res) => {
     try {
         const updated = await attendanceService.updateAttendance(req.params.emp_id, req.params.id, req.body, req.user.employee);
         if (!updated.success) {
@@ -67,7 +67,7 @@ router.patch('/employee/:emp_id/attendance/:id', supervisorOrAdmin, async (req, 
         res.status(500).send({success: false, err: e.message});
     }
 });
-router.get('/attendance/all', auth, async (req, res) => {
+router.get('/api/attendance/all', auth, async (req, res) => {
     try {
         const attendances = await attendanceService.queryAttendance(req.query);
         if (!attendances.success) {

@@ -7,8 +7,8 @@ const {addAPayFrequency, deletePayFrequencies, readAllPayFrequencies} = require(
 
 const router = new express.Router();
 
-router.post('/pay_frequencies', isAdmin, addAPayFrequency);
-router.delete('/pay_frequencies', isAdmin, deletePayFrequencies);
-router.get('/pay_frequencies', auth, readAllPayFrequencies);
+router.post('/api/pay_frequencies', isAdmin, addAPayFrequency);
+router.delete('/api/pay_frequencies', isAdmin, deletePayFrequencies);
+router.get('/api/pay_frequencies', auth, readAllPayFrequencies);
 
 module.exports = router;

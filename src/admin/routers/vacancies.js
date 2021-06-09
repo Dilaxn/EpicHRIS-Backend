@@ -6,9 +6,9 @@ const {addVacancy, readVacancy, readAllVacancies, deleteVacancies} = require('..
 const router = new express.Router();
 
 
-router.post('/vacancies', isAdmin, addVacancy);
-router.get('/vacancies/:id', isAdmin, readVacancy);
-router.get('/vacancies', readAllVacancies);
+router.post('/api/vacancies', isAdmin, addVacancy);
+router.get('/api/vacancies/:id', isAdmin, readVacancy);
+router.get('/api/vacancies', readAllVacancies);
 // router.patch('/skills/:id', isAdmin, updateASkill);
-router.delete('/vacancies', isAdmin, deleteVacancies);
+router.delete('/api/vacancies', isAdmin, deleteVacancies);
 module.exports = router;

@@ -3,7 +3,7 @@ const isAdmin = require('../../../middleware/admin');
 const LeavePeriodConfigurationService = require('./LeavePeriodConfigurationService');
 const leavePeriodConfigurationService = new LeavePeriodConfigurationService();
 const router = new express.Router();
-router.patch('/leavePeriod/configure', isAdmin, async (req, res) => {
+router.patch('/api/leavePeriod/configure', isAdmin, async (req, res) => {
     try {
         const result = await leavePeriodConfigurationService.updateLeavePeriodConfiguration(req.body);
         if (!result.success) {
@@ -15,7 +15,7 @@ router.patch('/leavePeriod/configure', isAdmin, async (req, res) => {
         res.status(500).send({success: false, error: e.message});
     }
 })
-router.get('/leavePeriod/configure', isAdmin, async (req, res) => {
+router.get('/api/leavePeriod/configure', isAdmin, async (req, res) => {
     try {
         const leavePeriodConfig = await leavePeriodConfigurationService.getLeavePeriodConfiguration();
         if (!leavePeriodConfig) {

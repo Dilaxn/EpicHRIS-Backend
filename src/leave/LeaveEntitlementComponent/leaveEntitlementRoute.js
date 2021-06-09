@@ -5,7 +5,7 @@ const auth = require('../../../middleware/auth');
 const LeaveEntitlementService = require('./LeaveEntitlementService');
 const leaveEntitlementService = new LeaveEntitlementService();
 const router = new express.Router();
-router.post('/entitlements', isAdmin, async (req, res) => {
+router.post('/api/entitlements', isAdmin, async (req, res) => {
     try {
         if (!req.body.employees) {
             res.status(400).send({success: false, message: 'employees property not found in the body'});
@@ -25,7 +25,7 @@ router.post('/entitlements', isAdmin, async (req, res) => {
         res.status(500).send({success: false, err: e.message});
     }
 });
-router.get('/employees/me/entitlements', auth, async (req, res) => {
+router.get('/api/employees/me/entitlements', auth, async (req, res) => {
     try {
         const entitlements = await leaveEntitlementService.queryEntitlement(req.user.employee, req.query);
         if (!entitlements.success) {
@@ -37,7 +37,7 @@ router.get('/employees/me/entitlements', auth, async (req, res) => {
         res.status(500).send({success: true, err: e.message});
     }
 })
-router.get('/employees/:emp_id/entitlements', supervisorOrAdmin, async (req, res) => {
+router.get('/api/employees/:emp_id/entitlements', supervisorOrAdmin, async (req, res) => {
     try {
         const entitlements = await leaveEntitlementService.queryEntitlement(req.params.emp_id, req.query);
         if (!entitlements.success) {
@@ -49,7 +49,7 @@ router.get('/employees/:emp_id/entitlements', supervisorOrAdmin, async (req, res
         res.status(500).send({success: false, err: e.message});
     }
 })
-router.patch('/entitlements/:id', isAdmin, async (req, res) => {
+router.patch('/api/entitlements/:id', isAdmin, async (req, res) => {
     try {
         const updated = await leaveEntitlementService.updateEntitlement(req.params.id, req.body);
         if (!updated.success) {
@@ -62,7 +62,7 @@ router.patch('/entitlements/:id', isAdmin, async (req, res) => {
         res.status(500).send({success: false, err: e.message});
     }
 })
-router.delete('/entitlements', isAdmin, async (req, res) => {
+router.delete('/api/entitlements', isAdmin, async (req, res) => {
     try {
         const deleted = await leaveEntitlementService.deleteEntitlements(req.body);
         if (!deleted.success) {

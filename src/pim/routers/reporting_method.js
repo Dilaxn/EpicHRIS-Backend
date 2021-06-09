@@ -7,7 +7,7 @@ const {readAllReportingMethod, AddAReportingMethod, deleteReportingMethods} = re
 
 const router = new express.Router();
 
-router.get('/reporting_methods', auth, readAllReportingMethod);
-router.post('/reporting_methods', isAdmin, AddAReportingMethod);
-router.delete('/reporting_methods', isAdmin, deleteReportingMethods);
+router.get('/api/reporting_methods', auth, readAllReportingMethod);
+router.post('/api/reporting_methods', isAdmin, AddAReportingMethod);
+router.delete('/api/reporting_methods', isAdmin, deleteReportingMethods);
 module.exports = router;

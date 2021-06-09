@@ -4,7 +4,7 @@ const CustomerService = require('./CustomerService');
 const supervisorOrAdmin = require("../../../../src-2021-05-27/middleware/supervisor_or_admin");
 const customerService = new CustomerService();
 const router = new express.Router();
-router.post('/customers', isAdmin, async (req, res) => {
+router.post('/api/customers', isAdmin, async (req, res) => {
     try {
         const addedCustomer = await customerService.addCustomer(req.body);
         res.status(201).send(addedCustomer);
@@ -12,7 +12,7 @@ router.post('/customers', isAdmin, async (req, res) => {
         res.status(500).send({success: false, err: e.message});
     }
 });
-router.get('/Customers', supervisorOrAdmin, async (req, res) => {
+router.get('/api/Customers', supervisorOrAdmin, async (req, res) => {
     try {
         const customers = await customerService.getCustomers();
         if (!customers.success) {
@@ -24,7 +24,7 @@ router.get('/Customers', supervisorOrAdmin, async (req, res) => {
         res.status(500).send({success: false, err: e.message});
     }
 })
-router.patch('/customers/:id', isAdmin, async (req, res) => {
+router.patch('/api/customers/:id', isAdmin, async (req, res) => {
     try {
         const updated = await customerService.updateCustomer(req.params.id, req.body);
         if (!updated.success) {
@@ -36,7 +36,7 @@ router.patch('/customers/:id', isAdmin, async (req, res) => {
         res.status(500).send({success: false, err: e.message});
     }
 })
-router.delete('/customers', isAdmin, async (req, res) =>{
+router.delete('/api/customers', isAdmin, async (req, res) =>{
     try {
         const deleted = await customerService.deleteCustomer(req.body.id);
         if (!deleted.success) {

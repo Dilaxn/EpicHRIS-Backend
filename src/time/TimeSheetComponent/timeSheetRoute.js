@@ -5,7 +5,7 @@ const supervisorOrAdmin = require('../../../middleware/supervisor_or_admin');
 const TimeSheetService = require('./TimeSheetService');
 const timeSheetService = new TimeSheetService();
 const router = new express.Router();
-router.get('/timeSheets/weeks/:id', auth, async (req, res) => {
+router.get('/api/timeSheets/weeks/:id', auth, async (req, res) => {
     try {
         const timeSheet = await timeSheetService.readAnEmployeeTimeSheet(req.user.employee, req.params.id);
         if (!timeSheet.success) {
@@ -17,7 +17,7 @@ router.get('/timeSheets/weeks/:id', auth, async (req, res) => {
         res.status(500).send({success: false, err: e.message});
     }
 });
-router.get('/employees/:emp_id/timeSheets/weeks/:id', supervisorOrAdmin, async (req, res) => {
+router.get('/api/employees/:emp_id/timeSheets/weeks/:id', supervisorOrAdmin, async (req, res) => {
     try {
         const employeeTimeSheet = await timeSheetService.readAnEmployeeTimeSheet(req.params.emp_id, req.params.id);
         if (!employeeTimeSheet.success) {
@@ -32,7 +32,7 @@ router.get('/employees/:emp_id/timeSheets/weeks/:id', supervisorOrAdmin, async (
 })
 
 
-router.patch('/timeSheets/:id/update', auth, async (req, res) => {
+router.patch('/api/timeSheets/:id/update', auth, async (req, res) => {
     try {
         const updated = await timeSheetService.updateEmployeeTimeSheet(req.user.employee, req.params.id, req.body, 'not-submitted', req.user.employee);
         if (!updated.success) {
@@ -44,7 +44,7 @@ router.patch('/timeSheets/:id/update', auth, async (req, res) => {
         res.status(500).send({success: false, err: e.message});
     }
 });
-router.patch('/employees/:emp_id/timeSheets/:id/update', supervisorOrAdmin, async (req, res) => {
+router.patch('/api/employees/:emp_id/timeSheets/:id/update', supervisorOrAdmin, async (req, res) => {
     try {
         const updatedEmployeeTimeSheet = await timeSheetService.updateEmployeeTimeSheet(req.params.emp_id, req.params.id, req.body, {$in: ['not-submitted', 'submitted']}, req.user.employee);
         if (!updatedEmployeeTimeSheet.success) {
@@ -58,7 +58,7 @@ router.patch('/employees/:emp_id/timeSheets/:id/update', supervisorOrAdmin, asyn
 });
 
 
-router.patch('/timeSheets/:id/submit', auth, async (req, res) => {
+router.patch('/api/timeSheets/:id/submit', auth, async (req, res) => {
     try {
         const submitted = await timeSheetService.submitEmployeeTimeSheet(req.user.employee, req.params.id, req.body, req.user.employee);
         if (!submitted.success) {
@@ -70,7 +70,7 @@ router.patch('/timeSheets/:id/submit', auth, async (req, res) => {
         res.status(500).send({success: false, err: e.message});
     }
 });
-router.patch('/employees/:emp_id/timeSheets/:id/submit', auth, async (req, res) => {
+router.patch('/api/employees/:emp_id/timeSheets/:id/submit', auth, async (req, res) => {
     try {
         const employeeId = req.params.emp_id;
         const timeSheetId = req.params.id;
@@ -86,7 +86,7 @@ router.patch('/employees/:emp_id/timeSheets/:id/submit', auth, async (req, res) 
     }
 });
 
-router.get('/timeSheets/mine', auth, async (req, res) => {
+router.get('/api/timeSheets/mine', auth, async (req, res) => {
     try {
         const myTimeSheets = await timeSheetService.queryMyTimeSheets(req.query.timeSheetWeek, req.query.status, req.user.employee);
         if (!myTimeSheets.success) {
@@ -99,7 +99,7 @@ router.get('/timeSheets/mine', auth, async (req, res) => {
     }
 })
 //req.query = { employee, timeSheetWeek, status }
-router.get('/subordinates/timeSheets', auth, async (req, res) => {
+router.get('/api/subordinates/timeSheets', auth, async (req, res) => {
     try {
         const timeSheets = await timeSheetService.queryMySubordinatesTimeSheets(req.query.employee, req.query.timeSheetWeek, req.query.status, req.user.employee);
         if (!timeSheets.success) {
@@ -112,7 +112,7 @@ router.get('/subordinates/timeSheets', auth, async (req, res) => {
     }
 });
 //req.query = { employee, timeSheetWeek, status }
-router.get('/timeSheets/all', isAdmin, async (req, res) => {
+router.get('/api/timeSheets/all', isAdmin, async (req, res) => {
     try {
         const submitted = await timeSheetService.queryAllTimeSheets(req.query.employee, req.query.timeSheetWeek, req.query.status);
         if (!submitted.success) {
@@ -126,7 +126,7 @@ router.get('/timeSheets/all', isAdmin, async (req, res) => {
 });
 
 //{emp_id: employee ID, id: time sheet ID, action: submitted/approved/rejected/reset }
-router.patch('/employees/:emp_id/timeSheets/:id/:action', supervisorOrAdmin, async (req, res) => {
+router.patch('/api/employees/:emp_id/timeSheets/:id/:action', supervisorOrAdmin, async (req, res) => {
     try {
         const timeSheet = await timeSheetService.submitOrApproveOrResetOrReject(req.params.id, req.params.emp_id, req.user.employee, req.body.comment, req.params.action);
         if (!timeSheet.success) {

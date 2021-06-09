@@ -7,10 +7,10 @@ const {addAnEducationLevel, readAEducationLevel, readAllEducationLevel, updateAn
 const router = new express.Router();
 
 
-router.post('/education_levels', isAdmin, addAnEducationLevel);
-router.get('/education_levels/:id', auth, readAEducationLevel);
-router.get('/education_levels', auth, readAllEducationLevel);
-router.patch('/education_levels/:id', isAdmin, updateAnEducationLevel);
-router.delete('/education_levels', isAdmin, deleteEducationLevels);
+router.post('/api/education_levels', isAdmin, addAnEducationLevel);
+router.get('/api/education_levels/:id', auth, readAEducationLevel);
+router.get('/api/education_levels', auth, readAllEducationLevel);
+router.patch('/api/education_levels/:id', isAdmin, updateAnEducationLevel);
+router.delete('/api/education_levels', isAdmin, deleteEducationLevels);
 
 module.exports = router;

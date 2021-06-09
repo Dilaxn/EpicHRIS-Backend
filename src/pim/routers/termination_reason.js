@@ -6,10 +6,10 @@ const {addATerminationReason, readATerminationReason, readAllTerminationReason, 
 const router = new express.Router();
 
 
-router.post('/termination_reasons', isAdmin, addATerminationReason);
-router.get('/termination_reasons/:id', auth, readATerminationReason);
-router.get('/termination_reasons', auth, readAllTerminationReason);
-router.patch('/termination_reasons/:id', isAdmin, updateATerminationReason);
-router.delete('/termination_reasons', isAdmin, deleteMultipleTerminationReasons);
+router.post('/api/termination_reasons', isAdmin, addATerminationReason);
+router.get('/api/termination_reasons/:id', auth, readATerminationReason);
+router.get('/api/termination_reasons', auth, readAllTerminationReason);
+router.patch('/api/termination_reasons/:id', isAdmin, updateATerminationReason);
+router.delete('/api/termination_reasons', isAdmin, deleteMultipleTerminationReasons);
 
 module.exports = router;

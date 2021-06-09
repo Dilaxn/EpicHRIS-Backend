@@ -5,6 +5,6 @@ const {readAllCurrencies} = require('../controllers/currency');
 const router = new express.Router();
 
 
-router.get('/currencies', auth, readAllCurrencies)
+router.get('/api/currencies', auth, readAllCurrencies)
 
 module.exports = router;

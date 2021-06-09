@@ -3,7 +3,7 @@ const isAdmin = require('../../../middleware/admin');
 const WorkWeekService = require('./WorkWeekService');
 const workWeekService = new WorkWeekService();
 const router = new express.Router();
-router.patch('/workWeek', isAdmin, async (req, res) => {
+router.patch('/api/workWeek', isAdmin, async (req, res) => {
     try {
         const updated = await workWeekService.updateWorkWeek(req.body);
         res.status(200).send({success: true, updated});

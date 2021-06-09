@@ -6,8 +6,8 @@ const {readAllCountries, findOneCountry} = require('../controllers/country');
 const router = new express.Router();
 
 
-router.get('/countries/all', auth, readAllCountries);
-router.get('/countries', auth, findOneCountry);
+router.get('/api/countries/all', auth, readAllCountries);
+router.get('/api/countries', auth, findOneCountry);
 
 
 module.exports = router;

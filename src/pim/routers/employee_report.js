@@ -6,10 +6,10 @@ const {defineAReport, readAllDefinedReports, updateADefinedReport, deleteDefined
 
 const router = new express.Router();
 
-router.post('/employee_reports', isAdmin, defineAReport);
-router.get('/employee_reports', isAdmin, readAllDefinedReports);
-router.patch('/employee_reports/:id', isAdmin, updateADefinedReport);
-router.delete('/employee_reports', isAdmin, deleteDefinedReports);
-router.get('/employee_reports/:id', isAdmin, runAReport);
+router.post('/api/employee_reports', isAdmin, defineAReport);
+router.get('/api/employee_reports', isAdmin, readAllDefinedReports);
+router.patch('/api/employee_reports/:id', isAdmin, updateADefinedReport);
+router.delete('/api/employee_reports', isAdmin, deleteDefinedReports);
+router.get('/api/employee_reports/:id', isAdmin, runAReport);
 
 module.exports = router;

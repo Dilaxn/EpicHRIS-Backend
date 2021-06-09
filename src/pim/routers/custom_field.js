@@ -6,11 +6,11 @@ const {addACustomField, getACustomField, getAllCustomFields, updateACustomField,
 
 const router = new express.Router();
 
-router.post('/custom_fields', isAdmin, addACustomField);
-router.get('/custom_fields/:id',  auth, getACustomField);
-router.get('/custom_fields',  auth, getAllCustomFields);
-router.get('/custom_fields/:screen/all', auth, getAllCustomFieldsOfAScreen);
-router.patch('/custom_fields/:id', isAdmin, updateACustomField);
-router.delete('/custom_fields', isAdmin, deleteCustomFields);
+router.post('/api/custom_fields', isAdmin, addACustomField);
+router.get('/api/custom_fields/:id',  auth, getACustomField);
+router.get('/api/custom_fields',  auth, getAllCustomFields);
+router.get('/api/custom_fields/:screen/all', auth, getAllCustomFieldsOfAScreen);
+router.patch('/api/custom_fields/:id', isAdmin, updateACustomField);
+router.delete('/api/custom_fields', isAdmin, deleteCustomFields);
 
 module.exports = router

@@ -7,11 +7,11 @@ const {addAPayGrade, getAPayGrade, getAllPayGrades, updateAPayGrade, deletePayGr
 const router = new express.Router();
 
 
-router.post('/pay_grades', isAdmin, addAPayGrade);
-router.get('/pay_grades/:id', auth, getAPayGrade);
-router.get('/pay_grades', auth, getAllPayGrades);
-router.patch('/pay_grades/:id', isAdmin, updateAPayGrade);
-router.delete('/pay_grades', isAdmin, deletePayGrades);
+router.post('/api/pay_grades', isAdmin, addAPayGrade);
+router.get('/api/pay_grades/:id', auth, getAPayGrade);
+router.get('/api/pay_grades', auth, getAllPayGrades);
+router.patch('/api/pay_grades/:id', isAdmin, updateAPayGrade);
+router.delete('/api/pay_grades', isAdmin, deletePayGrades);
 
 
 module.exports = router;

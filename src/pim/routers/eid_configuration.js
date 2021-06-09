@@ -5,5 +5,5 @@ const {updateEidConf} = require('../controllers/eid_configuration');
 
 const router = new express.Router();
 
-router.patch('/eid_configuration', isAdmin, updateEidConf);
+router.patch('/api/eid_configuration', isAdmin, updateEidConf);
 module.exports = router;

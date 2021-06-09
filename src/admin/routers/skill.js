@@ -6,9 +6,9 @@ const {addASkill, readASkill, readAllSkills, updateASkill, deleteSkills} = requi
 const router = new express.Router();
 
 
-router.post('/skills', isAdmin, addASkill);
-router.get('/skills/:id', auth, readASkill);
-router.get('/skills', auth, readAllSkills);
-router.patch('/skills/:id', isAdmin, updateASkill);
-router.delete('/skills', isAdmin, deleteSkills);
+router.post('/api/skills', isAdmin, addASkill);
+router.get('/api/skills/:id', auth, readASkill);
+router.get('/api/skills', auth, readAllSkills);
+router.patch('/api/skills/:id', isAdmin, updateASkill);
+router.delete('/api/skills', isAdmin, deleteSkills);
 module.exports = router;

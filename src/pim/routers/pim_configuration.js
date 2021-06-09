@@ -5,5 +5,5 @@ const {updatePimConfiguration} = require('../controllers/pim_configuration');
 
 const router = new express.Router();
 
-router.patch('/pim_configuration', isAdmin, updatePimConfiguration);
+router.patch('/api/pim_configuration', isAdmin, updatePimConfiguration);
 module.exports = router;
