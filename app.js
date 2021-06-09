@@ -86,7 +86,7 @@ app.use((err, req, res, next) => {
     next();
 });
 
-var request = require("request");
+// var request = require("request");
 
 // request.get(
 //     {
@@ -103,32 +103,32 @@ var request = require("request");
 //     }
 // );
 
-app.get('/vacanciesPosts', function(req, res) {
-    let y=[];
-    request.get(
-        {
-            url : "http://localhost:3001/vacancies"
-        },
-        function (error, response, body) {
-            // Do more stuff with 'body' here
-
-            if (!error && response.statusCode == 200) {
-
-                var json_body = JSON.parse(body);
-
-
-                res.render( "pages/Vacancies", {name:json_body});
-            }
-        }
-    );
-
-});
-
-app.post('/vacancyApply', function(req, res) {
-    console.log("x"+req.body.mName)
-    res.render( "pages/VacancyApply",{mn:req.body.mName,mi:req.body.mId});
-
-});
+// app.get('/vacanciesPosts', function(req, res) {
+//     let y=[];
+//     request.get(
+//         {
+//             url : "http://localhost:3001/vacancies"
+//         },
+//         function (error, response, body) {
+//             // Do more stuff with 'body' here
+//
+//             if (!error && response.statusCode == 200) {
+//
+//                 var json_body = JSON.parse(body);
+//
+//
+//                 res.render( "pages/Vacancies", {name:json_body});
+//             }
+//         }
+//     );
+//
+// });
+//
+// app.post('/vacancyApply', function(req, res) {
+//     console.log("x"+req.body.mName)
+//     res.render( "pages/VacancyApply",{mn:req.body.mName,mi:req.body.mId});
+//
+// });
 
 // app.post("http://localhost:3001/applicants",(req,res)=>{
 //     console.log(req.body)
