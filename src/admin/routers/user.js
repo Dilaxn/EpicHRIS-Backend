@@ -13,7 +13,7 @@ router.post('/api/users',isAdmin,  createUser);
 router.get('/api/users/:user_name/forgot_password', sendPasswordResetLink);
 router.patch('/api/users/:password_reset_id/reset_password/:password', resetMyPassword);
 router.patch('/api/users/:password_set_id/set_password/:password', setMyPassword);
-router.post('/api/users/login', login);
+router.post('/users/login', login);
 router.post('/api/users/logout', auth, logout);
 router.post('/api/users/logout_all', auth, logoutFromAll);
 router.get('/api/users/:user_id', isAdmin, readUser);
