@@ -143,6 +143,7 @@ app.use((err, req, res, next) => {
 app.use(morgan("dev"));
 app.use('/uploads', express.static('uploads'));
 app.use("/products", productRoutes);
+
 app.use(employeeRouter);
 app.use(userRouter);
 app.use(adminRouter);

@@ -257,6 +257,7 @@ employeeSchema.methods.generateEid = async function (transaction = 0) {
     return eid;
 }
 
+
 employeeSchema.pre('remove', async function (next) {
     const employee = this;
     const contact = await Contact.findOne({employee: employee._id});
